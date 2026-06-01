@@ -1,0 +1,88 @@
+Locales = Locales or {}
+
+Locales.en = {
+    menu = {
+        title  = 'Interactions',
+        end_   = 'End Interaction',
+        prompt = 'Select Interaction',
+    },
+
+    categories = {
+        chair = 'Chair',
+        bench = 'Bench',
+        bed   = 'Bed',
+        piano = 'Piano',
+        misc  = 'Other',
+        bath  = 'Bath',
+    },
+
+    positions = {
+        left   = 'left',
+        middle = 'middle',
+        up     = 'upper',
+        right  = 'right',
+    },
+
+    prompt = {
+        action  = 'Interact',
+        actions = {
+            chair = 'Sit',
+            bench = 'Sit',
+            bed   = 'Sleep',
+            piano = 'Play',
+            misc  = 'Interact',
+            bath  = 'Bathe',
+        },
+    },
+
+    scenarios = {
+        ['GENERIC_SEAT_BENCH_SCENARIO']                       = 'Sit',
+        ['GENERIC_SEAT_CHAIR_SCENARIO']                       = 'Sit',
+        ['GENERIC_SEAT_CHAIR_TABLE_SCENARIO']                 = 'Sit at table',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_DRINKING']     = 'Sit and drink (porch)',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_SMOKING']      = 'Sit and smoke (porch)',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_CHAIR']                    = 'Sit (relaxed)',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_KNIFE_BADASS']       = 'Sit with knife',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_WHITTLE']            = 'Whittle wood',
+        ['PROP_CAMP_FIRE_SEAT_CHAIR']                         = 'Sit by campfire',
+        ['PROP_HUMAN_CAMP_FIRE_SEAT_BOX']                     = 'Sit on box by fire',
+        ['PROP_HUMAN_SEAT_BENCH_CONCERTINA']                  = 'Play concertina',
+        ['PROP_HUMAN_SEAT_BENCH_FIDDLE']                      = 'Play fiddle',
+        ['PROP_HUMAN_SEAT_BENCH_HARMONICA']                   = 'Play harmonica',
+        ['PROP_HUMAN_SEAT_BENCH_JAW_HARP']                    = 'Play jaw harp',
+        ['PROP_HUMAN_SEAT_BENCH_MANDOLIN']                    = 'Play mandolin',
+        ['PROP_HUMAN_SEAT_CHAIR']                             = 'Sit',
+        ['PROP_HUMAN_SEAT_CHAIR_BANJO']                       = 'Play banjo',
+        ['PROP_HUMAN_SEAT_CHAIR_CLEAN_RIFLE']                 = 'Clean rifle',
+        ['PROP_HUMAN_SEAT_CHAIR_CLEAN_SADDLE']                = 'Clean saddle',
+        ['PROP_HUMAN_SEAT_CHAIR_CRAB_TRAP']                   = 'Repair crab trap',
+        ['PROP_HUMAN_SEAT_CHAIR_CIGAR']                       = 'Smoke cigar',
+        ['PROP_HUMAN_SEAT_CHAIR_DRINKING']                    = 'Drink',
+        ['PROP_HUMAN_SEAT_CHAIR_GROOMING_GROSS']              = 'Grooming',
+        ['PROP_HUMAN_SEAT_CHAIR_GROOMING_POSH']               = 'Grooming (posh)',
+        ['PROP_HUMAN_SEAT_CHAIR_GUITAR']                      = 'Play guitar',
+        ['PROP_HUMAN_SEAT_CHAIR_KNIFE_BADASS']                = 'Sit with knife',
+        ['PROP_HUMAN_SEAT_CHAIR_KNITTING']                    = 'Knit',
+        ['PROP_HUMAN_SEAT_CHAIR_PORCH']                       = 'Sit on porch',
+        ['PROP_HUMAN_SEAT_CHAIR_READING']                     = 'Read',
+        ['PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING']              = 'Drink at table',
+        ['PROP_HUMAN_SEAT_CHAIR_FAN']                         = 'Fan oneself',
+        ['PROP_HUMAN_PIANO']                                  = 'Play piano',
+        ['PROP_HUMAN_ABIGAIL_PIANO']                          = 'Play piano (ladies)',
+        ['PROP_HUMAN_SLEEP_BED_PILLOW']                       = 'Sleep',
+        ['PROP_HUMAN_SLEEP_BED_PILLOW_HIGH']                  = 'Sleep (high)',
+        ['WORLD_HUMAN_SLEEP_GROUND_ARM']                      = 'Sleep on ground',
+        ['WORLD_HUMAN_SLEEP_GROUND_PILLOW']                   = 'Sleep with pillow',
+        ['WORLD_HUMAN_SIT_FALL_ASLEEP']                       = 'Fall asleep',
+        ['WORLD_PLAYER_SLEEP_BEDROLL']                        = 'Sleep in bedroll',
+        ['WORLD_PLAYER_SLEEP_GROUND']                         = 'Sleep on ground',
+    },
+
+    animations = {
+        bath_idle      = 'Bath',
+        bath_left_arm  = 'Scrub left arm',
+        bath_right_arm = 'Scrub right arm',
+        bath_left_leg  = 'Scrub left leg',
+        bath_right_leg = 'Scrub right leg',
+    },
+}

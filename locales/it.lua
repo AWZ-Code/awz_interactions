@@ -1,0 +1,88 @@
+Locales = Locales or {}
+
+Locales.it = {
+    menu = {
+        title  = 'Interazioni',
+        end_   = 'Termina interazione',
+        prompt = 'Seleziona interazione',
+    },
+
+    categories = {
+        chair = 'Sedia',
+        bench = 'Panca',
+        bed   = 'Letto',
+        piano = 'Pianoforte',
+        misc  = 'Altro',
+        bath  = 'Bagno',
+    },
+
+    positions = {
+        left   = 'sinistra',
+        middle = 'centro',
+        up     = 'sopra',
+        right  = 'destra',
+    },
+
+    prompt = {
+        action  = 'Interagisci',
+        actions = {
+            chair = 'Siediti',
+            bench = 'Siediti',
+            bed   = 'Dormi',
+            piano = 'Suona',
+            misc  = 'Interagisci',
+            bath  = 'Fai il bagno',
+        },
+    },
+
+    scenarios = {
+        ['GENERIC_SEAT_BENCH_SCENARIO']                       = 'Siediti',
+        ['GENERIC_SEAT_CHAIR_SCENARIO']                       = 'Siediti',
+        ['GENERIC_SEAT_CHAIR_TABLE_SCENARIO']                 = 'Siediti al tavolo',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_DRINKING']     = 'Siediti e bevi in veranda',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_SMOKING']      = 'Siediti e fuma in veranda',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_CHAIR']                    = 'Siediti rilassato',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_KNIFE_BADASS']       = 'Siediti con il coltello',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_WHITTLE']            = 'Intaglia il legno',
+        ['PROP_CAMP_FIRE_SEAT_CHAIR']                         = 'Siediti vicino al falò',
+        ['PROP_HUMAN_CAMP_FIRE_SEAT_BOX']                     = 'Siediti su una cassa vicino al fuoco',
+        ['PROP_HUMAN_SEAT_BENCH_CONCERTINA']                  = 'Suona la concertina',
+        ['PROP_HUMAN_SEAT_BENCH_FIDDLE']                      = 'Suona il violino',
+        ['PROP_HUMAN_SEAT_BENCH_HARMONICA']                   = 'Suona l’armonica',
+        ['PROP_HUMAN_SEAT_BENCH_JAW_HARP']                    = 'Suona lo scacciapensieri',
+        ['PROP_HUMAN_SEAT_BENCH_MANDOLIN']                    = 'Suona il mandolino',
+        ['PROP_HUMAN_SEAT_CHAIR']                             = 'Siediti',
+        ['PROP_HUMAN_SEAT_CHAIR_BANJO']                       = 'Suona il banjo',
+        ['PROP_HUMAN_SEAT_CHAIR_CLEAN_RIFLE']                 = 'Pulisci il fucile',
+        ['PROP_HUMAN_SEAT_CHAIR_CLEAN_SADDLE']                = 'Pulisci la sella',
+        ['PROP_HUMAN_SEAT_CHAIR_CRAB_TRAP']                   = 'Ripara la trappola per granchi',
+        ['PROP_HUMAN_SEAT_CHAIR_CIGAR']                       = 'Fuma un sigaro',
+        ['PROP_HUMAN_SEAT_CHAIR_DRINKING']                    = 'Bevi',
+        ['PROP_HUMAN_SEAT_CHAIR_GROOMING_GROSS']              = 'Sistemati',
+        ['PROP_HUMAN_SEAT_CHAIR_GROOMING_POSH']               = 'Sistemati con eleganza',
+        ['PROP_HUMAN_SEAT_CHAIR_GUITAR']                      = 'Suona la chitarra',
+        ['PROP_HUMAN_SEAT_CHAIR_KNIFE_BADASS']                = 'Siediti con il coltello',
+        ['PROP_HUMAN_SEAT_CHAIR_KNITTING']                    = 'Lavora a maglia',
+        ['PROP_HUMAN_SEAT_CHAIR_PORCH']                       = 'Siediti in veranda',
+        ['PROP_HUMAN_SEAT_CHAIR_READING']                     = 'Leggi',
+        ['PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING']              = 'Bevi al tavolo',
+        ['PROP_HUMAN_SEAT_CHAIR_FAN']                         = 'Fatti aria con il ventaglio',
+        ['PROP_HUMAN_PIANO']                                  = 'Suona il pianoforte',
+        ['PROP_HUMAN_ABIGAIL_PIANO']                          = 'Suona il pianoforte',
+        ['PROP_HUMAN_SLEEP_BED_PILLOW']                       = 'Dormi',
+        ['PROP_HUMAN_SLEEP_BED_PILLOW_HIGH']                  = 'Dormi su un cuscino alto',
+        ['WORLD_HUMAN_SLEEP_GROUND_ARM']                      = 'Dormi a terra',
+        ['WORLD_HUMAN_SLEEP_GROUND_PILLOW']                   = 'Dormi con il cuscino',
+        ['WORLD_HUMAN_SIT_FALL_ASLEEP']                       = 'Addormentati',
+        ['WORLD_PLAYER_SLEEP_BEDROLL']                        = 'Dormi nel giaciglio',
+        ['WORLD_PLAYER_SLEEP_GROUND']                         = 'Dormi a terra',
+    },
+
+    animations = {
+        bath_idle      = 'Bagno',
+        bath_left_arm  = 'Lava il braccio sinistro',
+        bath_right_arm = 'Lava il braccio destro',
+        bath_left_leg  = 'Lava la gamba sinistra',
+        bath_right_leg = 'Lava la gamba destra',
+    },
+}

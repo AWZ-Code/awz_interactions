@@ -1,0 +1,88 @@
+Locales = Locales or {}
+
+Locales.de = {
+    menu = {
+        title  = 'Interaktionen',
+        end_   = 'Beenden',
+        prompt = 'Interaktion wählen',
+    },
+
+    categories = {
+        chair = 'Stuhl',
+        bench = 'Bank',
+        bed   = 'Bett',
+        piano = 'Klavier',
+        misc  = 'Andere',
+        bath  = 'Wanne',
+    },
+
+    positions = {
+        left   = 'links',
+        middle = 'mitte',
+        up     = 'oben',
+        right  = 'rechts',
+    },
+
+    prompt = {
+        action  = 'Interagieren',
+        actions = {
+            chair = 'Sitzen',
+            bench = 'Sitzen',
+            bed   = 'Schlafen',
+            piano = 'Spielen',
+            misc  = 'Interagieren',
+            bath  = 'Baden',
+        },
+    },
+
+    scenarios = {
+        ['GENERIC_SEAT_BENCH_SCENARIO']                       = 'Sitzen',
+        ['GENERIC_SEAT_CHAIR_SCENARIO']                       = 'Sitzen',
+        ['GENERIC_SEAT_CHAIR_TABLE_SCENARIO']                 = 'Am Tisch sitzen',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_DRINKING']     = 'Sitzen und trinken (Veranda)',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_BENCH_PORCH_SMOKING']      = 'Sitzen und rauchen (Veranda)',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_CHAIR']                    = 'Sitzen (entspannt)',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_KNIFE_BADASS']       = 'Sitzen mit Messer',
+        ['MP_LOBBY_PROP_HUMAN_SEAT_CHAIR_WHITTLE']            = 'Holz schnitzen',
+        ['PROP_CAMP_FIRE_SEAT_CHAIR']                         = 'Sitzen am Lagerfeuer',
+        ['PROP_HUMAN_CAMP_FIRE_SEAT_BOX']                     = 'Auf Kiste am Feuer sitzen',
+        ['PROP_HUMAN_SEAT_BENCH_CONCERTINA']                  = 'Akkordeon spielen',
+        ['PROP_HUMAN_SEAT_BENCH_FIDDLE']                      = 'Geige spielen',
+        ['PROP_HUMAN_SEAT_BENCH_HARMONICA']                   = 'Mundharmonika spielen',
+        ['PROP_HUMAN_SEAT_BENCH_JAW_HARP']                    = 'Maultrommel spielen',
+        ['PROP_HUMAN_SEAT_BENCH_MANDOLIN']                    = 'Mandoline spielen',
+        ['PROP_HUMAN_SEAT_CHAIR']                             = 'Sitzen',
+        ['PROP_HUMAN_SEAT_CHAIR_BANJO']                       = 'Banjo spielen',
+        ['PROP_HUMAN_SEAT_CHAIR_CLEAN_RIFLE']                 = 'Gewehr putzen',
+        ['PROP_HUMAN_SEAT_CHAIR_CLEAN_SADDLE']                = 'Sattel putzen',
+        ['PROP_HUMAN_SEAT_CHAIR_CRAB_TRAP']                   = 'Krebsfalle reparieren',
+        ['PROP_HUMAN_SEAT_CHAIR_CIGAR']                       = 'Zigarre rauchen',
+        ['PROP_HUMAN_SEAT_CHAIR_DRINKING']                    = 'Trinken',
+        ['PROP_HUMAN_SEAT_CHAIR_GROOMING_GROSS']              = 'Pflegen',
+        ['PROP_HUMAN_SEAT_CHAIR_GROOMING_POSH']               = 'Pflegen (vornehm)',
+        ['PROP_HUMAN_SEAT_CHAIR_GUITAR']                      = 'Gitarre spielen',
+        ['PROP_HUMAN_SEAT_CHAIR_KNIFE_BADASS']                = 'Mit Messer sitzen',
+        ['PROP_HUMAN_SEAT_CHAIR_KNITTING']                    = 'Stricken',
+        ['PROP_HUMAN_SEAT_CHAIR_PORCH']                       = 'Auf Veranda sitzen',
+        ['PROP_HUMAN_SEAT_CHAIR_READING']                     = 'Lesen',
+        ['PROP_HUMAN_SEAT_CHAIR_TABLE_DRINKING']              = 'Am Tisch trinken',
+        ['PROP_HUMAN_SEAT_CHAIR_FAN']                         = 'Mit Fächer fächeln',
+        ['PROP_HUMAN_PIANO']                                  = 'Klavier spielen',
+        ['PROP_HUMAN_ABIGAIL_PIANO']                          = 'Klavier spielen (Damen)',
+        ['PROP_HUMAN_SLEEP_BED_PILLOW']                       = 'Schlafen',
+        ['PROP_HUMAN_SLEEP_BED_PILLOW_HIGH']                  = 'Schlafen (hoch)',
+        ['WORLD_HUMAN_SLEEP_GROUND_ARM']                      = 'Auf dem Boden schlafen',
+        ['WORLD_HUMAN_SLEEP_GROUND_PILLOW']                   = 'Mit Kissen schlafen',
+        ['WORLD_HUMAN_SIT_FALL_ASLEEP']                       = 'Einschlafen',
+        ['WORLD_PLAYER_SLEEP_BEDROLL']                        = 'Im Schlafsack schlafen',
+        ['WORLD_PLAYER_SLEEP_GROUND']                         = 'Auf dem Boden schlafen',
+    },
+
+    animations = {
+        bath_idle      = 'Baden',
+        bath_left_arm  = 'Linken Arm waschen',
+        bath_right_arm = 'Rechten Arm waschen',
+        bath_left_leg  = 'Linkes Bein waschen',
+        bath_right_leg = 'Rechtes Bein waschen',
+    },
+}
