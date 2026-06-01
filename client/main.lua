@@ -16,6 +16,10 @@ local PreviewKey          = nil
 local PreviewBusy         = false
 local PlayerPreviewHidden = false
 local HiddenPlayerPed     = nil
+local ObjectInteractionsByHash = {}
+local PointInteractions = {}
+local CachedAvailable = {}
+local CachedAvailableAt = 0
 
 
 local function SetLocalPlayerPreviewHidden(hidden)
@@ -44,6 +48,59 @@ local function SafeCall(fn, ...)
     return nil
 end
 
+local function DistanceSquared(a, b)
+    local dx = a.x - b.x
+    local dy = a.y - b.y
+    local dz = a.z - b.z
+    return dx * dx + dy * dy + dz * dz
+end
+
+local function NormalizeRadius(interaction)
+    local radius = tonumber(interaction.radius) or 1.5
+    interaction.radius = radius
+    interaction.radiusSq = radius * radius
+    return radius
+end
+
+local function BuildRuntimeInteractionCache()
+    ObjectInteractionsByHash = {}
+    PointInteractions = {}
+    MaxRadius = 0.0
+
+    for i = 1, #Interactions do
+        local interaction = Interactions[i]
+        local radius = NormalizeRadius(interaction)
+
+        if interaction.objects then
+            if radius > MaxRadius then MaxRadius = radius end
+
+            for j = 1, #interaction.objects do
+                local modelName = interaction.objects[j]
+                local modelHash = type(modelName) == 'number' and modelName or GetHashKey(modelName)
+
+                if modelHash and modelHash ~= 0 then
+                    local bucket = ObjectInteractionsByHash[modelHash]
+                    if not bucket then
+                        bucket = {}
+                        ObjectInteractionsByHash[modelHash] = bucket
+                    end
+
+                    bucket[#bucket + 1] = {
+                        interaction = interaction,
+                        modelName = modelName,
+                    }
+                end
+            end
+        else
+            if interaction.x and interaction.y and interaction.z then
+                interaction.runtimeCoords = vector3(interaction.x, interaction.y, interaction.z)
+                PointInteractions[#PointInteractions + 1] = interaction
+            end
+        end
+    end
+
+    if MaxRadius < 0.1 then MaxRadius = 0.1 end
+end
 
 local function IsInBannedArea(coords)
     local areas = Config.BannedAreas
@@ -53,7 +110,7 @@ local function IsInBannedArea(coords)
         local area = areas[i]
         if area and area.coords and area.radius then
             local radius = tonumber(area.radius) or 0.0
-            if radius > 0.0 and #(coords - area.coords) <= radius then
+            if radius > 0.0 and DistanceSquared(coords, area.coords) <= (radius * radius) then
                 return true
             end
         end
@@ -162,21 +219,9 @@ local function GetNearbyObjects(coords)
     return objects
 end
 
-local function HasCompatibleModel(entity, models)
-    local entityModel = GetEntityModel(entity)
-    for i = 1, #models do
-        if entityModel == GetHashKey(models[i]) then
-            return models[i]
-        end
-    end
-    return nil
-end
-
-local function CanStartAtObject(interaction, object, playerCoords, objectCoords)
-    if #(playerCoords - objectCoords) > interaction.radius then
-        return nil
-    end
-    return HasCompatibleModel(object, interaction.objects)
+local function CanStartAtObject(interaction, playerCoords, objectCoords)
+    local radiusSq = interaction.radiusSq or ((interaction.radius or 1.5) * (interaction.radius or 1.5))
+    return DistanceSquared(playerCoords, objectCoords) <= radiusSq
 end
 
 local function IsCompatible(t, ped)
@@ -320,9 +365,7 @@ local function StartInteractionAtCoords(interaction)
         PlayAnimation(ped, interaction.animation)
     end
 
-    if interaction.effect and Config.Effects[interaction.effect] then
-        Config.Effects[interaction.effect]()
-    end
+    RunInteractionEffect(interaction, 'start')
 
     CurrentInteraction = interaction
 end
@@ -551,33 +594,37 @@ local function GetAvailableInteractions()
     local ped          = PlayerPedId()
     local playerCoords = GetEntityCoords(ped)
     local available    = {}
-    local nearbyCache  = nil
 
     if IsInBannedArea(playerCoords) then
         return available
     end
 
-    for i = 1, #Interactions do
-        local interaction = Interactions[i]
-        if IsCompatible(interaction, ped) then
-            if interaction.objects then
-                if not nearbyCache then
-                    nearbyCache = GetNearbyObjects(playerCoords)
-                end
-                for j = 1, #nearbyCache do
-                    local object       = nearbyCache[j]
-                    local objectCoords = GetEntityCoords(object)
-                    local modelName    = CanStartAtObject(interaction, object, playerCoords, objectCoords)
-                    if modelName then
-                        CollectInteractions(available, interaction, ped, playerCoords, objectCoords, modelName, object)
+    local nearbyObjects = GetNearbyObjects(playerCoords)
+    for j = 1, #nearbyObjects do
+        local object = nearbyObjects[j]
+        if object and object ~= 0 and DoesEntityExist(object) then
+            local bucket = ObjectInteractionsByHash[GetEntityModel(object)]
+            if bucket then
+                local objectCoords = GetEntityCoords(object)
+
+                for k = 1, #bucket do
+                    local cached      = bucket[k]
+                    local interaction = cached.interaction
+
+                    if IsCompatible(interaction, ped) and CanStartAtObject(interaction, playerCoords, objectCoords) then
+                        CollectInteractions(available, interaction, ped, playerCoords, objectCoords, cached.modelName, object)
                     end
                 end
-            else
-                local target = vector3(interaction.x, interaction.y, interaction.z)
-                if #(playerCoords - target) <= interaction.radius then
-                    CollectInteractions(available, interaction, ped, playerCoords, target)
-                end
             end
+        end
+    end
+
+    for i = 1, #PointInteractions do
+        local interaction = PointInteractions[i]
+        local target = interaction.runtimeCoords
+
+        if target and IsCompatible(interaction, ped) and DistanceSquared(playerCoords, target) <= (interaction.radiusSq or 4.0) then
+            CollectInteractions(available, interaction, ped, playerCoords, target)
         end
     end
 
@@ -596,12 +643,30 @@ local function GetAvailableInteractions()
     return available
 end
 
+local function SetCachedAvailable(available)
+    CachedAvailable = available or {}
+    CachedAvailableAt = GetGameTimer()
+end
+
+local function GetFreshAvailableInteractions()
+    local now = GetGameTimer()
+    local cacheTtl = (tonumber(Config.NearbyCheckInterval) or 750) + 250
+
+    if CachedAvailable and CachedAvailableAt > 0 and (now - CachedAvailableAt) <= cacheTtl then
+        return CachedAvailable
+    end
+
+    local available = GetAvailableInteractions()
+    SetCachedAvailable(available)
+    return available
+end
+
 local function OpenPicker()
     ResetOpenKeyHold()
     if PickerIsOpen or not CanStartInteraction then return end
     StopInteractionPreview()
 
-    local available = GetAvailableInteractions()
+    local available = GetFreshAvailableInteractions()
 
     if #available == 0 then
         if CurrentInteraction then
@@ -690,12 +755,7 @@ RegisterCommand('interact', function()
 end, false)
 
 Citizen.CreateThread(function()
-    for i = 1, #Interactions do
-        if Interactions[i].radius and Interactions[i].radius > MaxRadius then
-            MaxRadius = Interactions[i].radius
-        end
-    end
-
+    BuildRuntimeInteractionCache()
     CreateOpenPrompt()
 
     while true do
@@ -705,6 +765,7 @@ Citizen.CreateThread(function()
 
         if CanStartInteraction and not PickerIsOpen and not CurrentInteraction then
             local available = GetAvailableInteractions()
+            SetCachedAvailable(available)
             if #available > 0 then
                 NearbyAvailable   = true
                 NearbyActionLabel = ResolvePromptLabel(available)
