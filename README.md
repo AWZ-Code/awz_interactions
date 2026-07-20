@@ -26,7 +26,4 @@ Credits:
 
 Original Resource: https://github.com/kibook/redm-interactions
 
-Inspiration:
-https://github.com/Spooni-Development/spooni_interactions & https://github.com/J0K3RSCRIPTS/J0K3R-interactions
-
 https://www.youtube.com/watch?v=AfYFEQw4L-k
